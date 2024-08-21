@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpf8nqr7736qm"]
+
+[ext_resource type="PackedScene" uid="uid://b1hm5pntj4jay" path="res://scenes/platforms/base_platform_big.tscn" id="1_4uhrf"]
+[ext_resource type="Texture2D" uid="uid://dosbxu1kptkwm" path="res://assets/sprites/platforms.png" id="2_m3qiy"]
+
+[node name="PlatformIceBig" instance=ExtResource("1_4uhrf")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_m3qiy")
+region_enabled = true
+region_rect = Rect2(16, 48, 32, 9)

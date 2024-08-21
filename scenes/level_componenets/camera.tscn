@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c04on5wnsg2k1"]
+
+[node name="Camera2D" type="Camera2D"]
+zoom = Vector2(2.8, 2.8)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 2.8

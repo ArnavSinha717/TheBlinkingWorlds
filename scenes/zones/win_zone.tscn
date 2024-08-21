@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://q02d1kgrakft"]
+
+[ext_resource type="Script" path="res://scripts/win_zone.gd" id="1_6uuxf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjoam"]
+size = Vector2(20, 40)
+
+[node name="WinZone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_6uuxf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qjoam")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

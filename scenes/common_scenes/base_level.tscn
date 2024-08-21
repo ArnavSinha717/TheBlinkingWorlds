@@ -1,0 +1,285 @@
+[gd_scene load_steps=16 format=3 uid="uid://bvtekujq2iee3"]
+
+[ext_resource type="PackedScene" uid="uid://c21da7t5pk60k" path="res://scenes/zones/killzone.tscn" id="1_28sov"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_m2fh3"]
+[ext_resource type="PackedScene" uid="uid://v2mrtvkw8ykj" path="res://scenes/characters/player.tscn" id="1_yc60u"]
+[ext_resource type="PackedScene" uid="uid://q02d1kgrakft" path="res://scenes/zones/win_zone.tscn" id="2_cqxxa"]
+[ext_resource type="PackedScene" uid="uid://c04on5wnsg2k1" path="res://scenes/level_componenets/camera.tscn" id="2_ilett"]
+[ext_resource type="Texture2D" uid="uid://di822t1678hjy" path="res://assets/sprites/heart_empty.png" id="3_h14so"]
+[ext_resource type="PackedScene" uid="uid://xmbphaqt63p5" path="res://scenes/common_scenes/main_menu.tscn" id="3_ypsbo"]
+[ext_resource type="FontFile" uid="uid://cxqirvuqonc58" path="res://assets/fonts/PixelOperator8.ttf" id="4_81bp6"]
+[ext_resource type="Texture2D" uid="uid://8to8og6iihxa" path="res://assets/sprites/heart_full.png" id="4_jpn0x"]
+[ext_resource type="Theme" uid="uid://bw4lshpe4qcet" path="res://main_menu_button_theme.tres" id="4_xjdjo"]
+[ext_resource type="Texture2D" uid="uid://dqmbbd14mymtu" path="res://assets/sprites/coin_single.png" id="5_tw2uh"]
+[ext_resource type="FontFile" uid="uid://b21weoeisxttv" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_5eu0t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c85qe"]
+bg_color = Color(0, 0, 0, 0.627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt5g7"]
+bg_color = Color(0, 0, 0, 0.792157)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1vrgc"]
+
+[node name="BaseLevel" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [16.0]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("1_m2fh3")
+
+[node name="HealthUI" type="CanvasLayer" parent="."]
+
+[node name="HeartEmpty" type="TextureRect" parent="HealthUI"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 31.0
+offset_bottom = 27.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_h14so")
+stretch_mode = 1
+
+[node name="HeartFull" type="TextureRect" parent="HealthUI"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 31.0
+offset_bottom = 27.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_jpn0x")
+stretch_mode = 1
+
+[node name="CoinUI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CoinUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -85.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="CoinUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = -5
+
+[node name="ColorRect" type="ColorRect" parent="CoinUI/MarginContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.505882)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CoinUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="CoinCount" type="Label" parent="CoinUI/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 24
+text = "XXX"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="CoinUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_tw2uh")
+expand_mode = 3
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c85qe")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/Panel/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_color = Color(0.109731, 0.109731, 0.109731, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Resume"
+
+[node name="Main Menu" type="Button" parent="PauseMenu/Panel/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_color = Color(0.109731, 0.109731, 0.109731, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="PauseMenu/Panel/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Resume")
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_color = Color(0.109731, 0.109731, 0.109731, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Quit"
+
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+
+[node name="Panel" type="Panel" parent="DeathScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jt5g7")
+
+[node name="LabelContainer" type="MarginContainer" parent="DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 110
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/Panel/LabelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DeathScreen/Panel/LabelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.764706, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_5eu0t")
+theme_override_font_sizes/font_size = 64
+text = "YOU DIED!"
+
+[node name="ButtonContainer" type="MarginContainer" parent="DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.5
+offset_top = -167.0
+offset_right = 113.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/Panel/ButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Restart" type="Button" parent="DeathScreen/Panel/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Restart"
+
+[node name="Main Menu" type="Button" parent="DeathScreen/Panel/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="DeathScreen/Panel/ButtonContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_xjdjo")
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_81bp6")
+theme_override_font_sizes/font_size = 28
+text = "Quit"
+
+[node name="TileMapLayers" type="Node" parent="."]
+
+[node name="Pickables" type="Node" parent="."]
+
+[node name="Coins" type="Node" parent="Pickables"]
+
+[node name="Fruits" type="Node" parent="Pickables"]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Zones" type="Node" parent="."]
+
+[node name="Killzone" parent="Zones" instance=ExtResource("1_28sov")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/Killzone"]
+shape = SubResource("WorldBoundaryShape2D_1vrgc")
+
+[node name="WinZone" parent="Zones" instance=ExtResource("2_cqxxa")]
+level = ExtResource("3_ypsbo")
+
+[node name="Player" parent="." instance=ExtResource("1_yc60u")]
+
+[node name="Camera2D" parent="Player" instance=ExtResource("2_ilett")]
+limit_smoothed = true
+
+[connection signal="pressed" from="PauseMenu/Panel/MarginContainer/VBoxContainer/Resume" to="GameManager" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/MarginContainer/VBoxContainer/Main Menu" to="GameManager" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/MarginContainer/VBoxContainer/Quit" to="GameManager" method="_on_quit_pressed"]
+[connection signal="pressed" from="DeathScreen/Panel/ButtonContainer/VBoxContainer/Restart" to="GameManager" method="_on_restart_pressed"]
+[connection signal="pressed" from="DeathScreen/Panel/ButtonContainer/VBoxContainer/Main Menu" to="GameManager" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="DeathScreen/Panel/ButtonContainer/VBoxContainer/Quit" to="GameManager" method="_on_quit_pressed"]

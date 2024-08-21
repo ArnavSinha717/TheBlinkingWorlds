@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1hm5pntj4jay"]
+
+[ext_resource type="Script" path="res://scripts/platform.gd" id="1_lema6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqp5t"]
+size = Vector2(32, 8)
+
+[node name="BasePlatformBig" type="AnimatableBody2D"]
+z_index = 3
+script = ExtResource("1_lema6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vqp5t")
+one_way_collision = true
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(17, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-17, 0)
+
+[node name="WaitingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="WaitingTimer" to="." method="_on_waiting_timer_timeout"]
