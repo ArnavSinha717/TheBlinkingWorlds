@@ -94,11 +94,13 @@ func get_direction() -> int:
 func on_player_hit():
 	if rolling == false:
 		audioPlayer.play("hurt")
-	
+		SignalManager.camera_shake.emit()
+		
 		if health > 0 and dead != true:
 			hit = true
 			health -= 1
 			SignalManager.player_health_changed.emit(health)
+			
 		elif dead != true:
 			dead = true
 			anim.play("death")
