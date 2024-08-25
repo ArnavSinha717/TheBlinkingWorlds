@@ -8,22 +8,25 @@ enum State { NORMAL, ROLLING }
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var audioPlayer: AnimationPlayer = $AudioPlayerController
 @onready var coyote_timer: Timer = $CoyoteTimer
+@onready var hitbox: CollisionShape2D = $StompArea/CollisionShape2D
 
 const ACCELERATION: float = 1300.0
 const MAX_HORIZONTAL_SPEED: float = 120.0
 const JUMP_VELOCITY = -300.0
+const BOUNCE_VELOCITY = -200.0
 
 var current_state = State.NORMAL
 var dead: bool = false
 var hit: bool = false
 var rolling: bool = false
 var health: int = 5
-var roll_speed: float = 160.0
+var roll_speed: float = 190.0
 var last_direction: int = 1;
 
 func _ready() -> void:
 	SignalManager.player_hit.connect(Callable(self, "on_player_hit"))
 	SignalManager.player_health_ui_setup.emit(health)
+	SignalManager.player_bounce.connect(Callable(self, "on_bounce"))
 
 
 func _physics_process(delta: float) -> void:
@@ -35,6 +38,11 @@ func _physics_process(delta: float) -> void:
 
 
 func process_normal(delta: float):
+	if velocity.y > 0:
+		hitbox.disabled = false
+	else:
+		hitbox.disabled = true
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -138,3 +146,7 @@ func get_animation():
 			sprite.scale.x = 1
 		elif direction < 0:
 			sprite.scale.x = -1
+
+
+func on_bounce():
+	velocity.y = BOUNCE_VELOCITY

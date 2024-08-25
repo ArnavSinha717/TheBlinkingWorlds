@@ -159,7 +159,7 @@ position = Vector2(856, 320)
 position = Vector2(2744, -16)
 
 [node name="Player" parent="." index="10"]
-position = Vector2(-64, 16)
+position = Vector2(328, 16)
 
 [node name="Camera2D" parent="Player" index="8"]
 limit_left = -108

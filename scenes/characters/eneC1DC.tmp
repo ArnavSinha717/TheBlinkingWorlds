@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0kou7ljd58sr"]
+[gd_scene load_steps=14 format=3 uid="uid://d0kou7ljd58sr"]
 
 [ext_resource type="Texture2D" uid="uid://pp07r37ylfh8" path="res://assets/sprites/slime_green.png" id="1_a5pfs"]
 [ext_resource type="Script" path="res://scripts/enemy_slime.gd" id="1_fbl2w"]
-[ext_resource type="AudioStream" uid="uid://bo5l3kn6tlegs" path="res://assets/sounds/explosion.wav" id="3_vcmbd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mylyo"]
 atlas = ExtResource("1_a5pfs")
@@ -96,10 +95,6 @@ target_position = Vector2(8, 0)
 position = Vector2(0, -5)
 target_position = Vector2(-9, 0)
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_vcmbd")
-bus = &"SFX"
-
 [node name="DamageZone" type="Area2D" parent="."]
 collision_mask = 2
 
@@ -108,17 +103,12 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_qqbj3")
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_mask = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_0kupe")
 debug_color = Color(0.823651, 0, 0.183699, 0.42)
 
-[node name="DeathTimer" type="Timer" parent="."]
-wait_time = 0.6
-one_shot = true
-
 [connection signal="body_entered" from="DamageZone" to="." method="_on_area_2d_body_entered"]
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
