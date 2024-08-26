@@ -5,9 +5,9 @@ extends AnimatableBody2D
 @onready var waiting_timer: Timer = $WaitingTimer
 
 @export var platform_waiting_time: float = 1.0
+@export var speed: float = 60
 
 var moveable: bool = true
-var speed: float = 60
 var direction: int = 1
 
 func _ready() -> void:

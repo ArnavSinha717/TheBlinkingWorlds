@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://pxjdy14xr6jn"]
+[gd_scene load_steps=10 format=4 uid="uid://pxjdy14xr6jn"]
 
 [ext_resource type="PackedScene" uid="uid://bvtekujq2iee3" path="res://scenes/common_scenes/base_level.tscn" id="1_5hfl7"]
 [ext_resource type="TileSet" uid="uid://uia0bpbp487r" path="res://tilesets/tilesets.tres" id="2_rx3si"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://clae2e0npplvj" path="res://scenes/red_fruit.tscn" id="5_avx7v"]
 [ext_resource type="PackedScene" uid="uid://byjtrr4ih30oi" path="res://scenes/platforms/platform_green_big.tscn" id="7_gp3o7"]
 [ext_resource type="PackedScene" uid="uid://katoujytnfa8" path="res://scenes/platforms/platform_dry_big.tscn" id="8_sl4ar"]
+[ext_resource type="PackedScene" uid="uid://cwa3dak0krcpq" path="res://scenes/common_scenes/transition.tscn" id="9_1qard"]
 
 [node name="BaseLevel" instance=ExtResource("1_5hfl7")]
 metadata/_edit_horizontal_guides_ = [-280.0, 252.0]
@@ -118,7 +119,7 @@ position = Vector2(2432, 24)
 position = Vector2(2448, 24)
 
 [node name="Coin31" parent="Pickables/Coins" index="30" instance=ExtResource("3_1jfwg")]
-position = Vector2(2468, 24)
+position = Vector2(2464, 24)
 
 [node name="Coin32" parent="Pickables/Coins" index="31" instance=ExtResource("3_1jfwg")]
 position = Vector2(2616, -8)
@@ -159,10 +160,12 @@ position = Vector2(856, 320)
 position = Vector2(2744, -16)
 
 [node name="Player" parent="." index="10"]
-position = Vector2(328, 16)
+position = Vector2(-64, 16)
 
-[node name="Camera2D" parent="Player" index="8"]
+[node name="Camera2D" parent="Player" index="9"]
 limit_left = -108
 limit_top = -280
 limit_right = 2732
 limit_bottom = 252
+
+[node name="TransitionComponent" parent="." index="11" instance=ExtResource("9_1qard")]

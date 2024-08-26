@@ -21,6 +21,7 @@ SignalManager="*res://scripts/signal_manager.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [input]

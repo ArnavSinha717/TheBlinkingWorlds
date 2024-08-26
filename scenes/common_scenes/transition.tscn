@@ -53,7 +53,7 @@ _data = {
 "transition": SubResource("Animation_8v2dq")
 }
 
-[node name="transition" type="Node"]
+[node name="TransitionComponent" type="Node"]
 script = ExtResource("1_nk1t7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
