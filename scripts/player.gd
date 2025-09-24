@@ -12,7 +12,7 @@ enum State { NORMAL, ROLLING }
 
 const ACCELERATION: float = 1300.0
 const MAX_HORIZONTAL_SPEED: float = 120.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -400.0
 const BOUNCE_VELOCITY = -200.0
 
 var current_state = State.NORMAL
@@ -55,17 +55,21 @@ func process_normal(delta: float):
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction: int = get_direction()
-	
+
 	if direction and !dead:
 		velocity.x += direction * ACCELERATION * delta
 	else:
 		#velocity.x += move_toward(velocity.x, 0, SPEED)
 		velocity.x = lerp(0.0, velocity.x, pow(2, -25 * delta));
-	
+
 	velocity.x = clamp(velocity.x, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
-	
+
 	if Input.is_action_just_pressed("roll") and !dead:
 		change_state(State.ROLLING)
+
+	# Handle world switching (F key) - will be handled by level script
+	if Input.is_action_just_pressed("switch_world"):
+		SignalManager.world_switch_requested.emit()
 	
 	var was_on_floor = is_on_floor()
 	move_and_slide()
