@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxtpvdt0ha0wx"]
+
+[ext_resource type="Script" path="res://area_2d.gd" id="1_8lft7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kill"]
+size = Vector2(2000, 20)
+
+[node name="KillZone" type="Area2D"]
+script = ExtResource("1_8lft7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kill")
+debug_color = Color(1, 0, 0, 0.5)

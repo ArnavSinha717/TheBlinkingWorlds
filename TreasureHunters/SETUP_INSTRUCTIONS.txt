@@ -1,0 +1,19 @@
+TREASURE HUNTERS BACKGROUND SETUP
+==================================
+
+1. Download the Treasure Hunters asset pack from:
+   https://pixelfrog-assets.itch.io/treasure-hunters
+
+2. Extract the downloaded files
+
+3. Copy the following background files to this directory:
+   - Palm Tree Island/Sprites/Background/BG Image.png
+   - Any additional background layers you want to use
+
+4. The game will automatically load these backgrounds once placed here.
+
+Directory structure should be:
+TreasureHunters/
+└── Backgrounds/
+    ├── BG Image.png
+    └── (other background files)
